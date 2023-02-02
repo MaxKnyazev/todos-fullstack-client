@@ -1,0 +1,16 @@
+@import '../../variable';
+
+.progressBar {
+  min-width: 100vw;
+  height: 0.25rem;
+  background-color: rgb(77, 77, 77);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__line {
+    position: absolute;
+    background-color: $main-green;
+    height: 0.25rem;
+  }
+}

@@ -1,0 +1,22 @@
+1. Скрывать прогресс бар на всех страницах, кроме todo.
+2. Если тудушка сделана, пусть будет черно-белой.
+3. Создать моковые данные (массив тудушек).
+4. Вместо тестовых данных отображать моковый масcив тудушек в TodoList.
+5. Все инпуты в формах привязать к локальным state'ам.
+6. Логика redux и thunk для todo.
+  6.1. Redux 
+  6.2. Action Types (pending, success, error)
+  6.3. Action Creators 
+  6.4. Todo Reducer 
+7. Логика redux и thunk для user.
+  7.1. Redux 
+  7.2. Action Types (pending, success, error)
+  7.3. Action Creators 
+  7.4. User Reducer 
+
+
+
+
+
+
+99. Логика регистрации и логина.

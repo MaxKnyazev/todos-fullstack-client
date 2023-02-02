@@ -1,0 +1,38 @@
+@import '../../variable';
+
+.notFound {
+  min-width: 100vw;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: $header-background-color;
+  color: $header-profile-color;
+
+  &__title {
+    font-size: 50px;
+  }
+
+  &__span {
+    font-size: 30px;
+    margin-bottom: 2rem;
+  }
+
+  &__button {
+    color: $header-profile-color;
+    background-color: $header-button-background-color;
+    font-size: 25px;
+    height: calc(3rem + 2vh);
+    width: calc(6rem + 4vw);
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $header-background-color;
+      color: #fff;
+      box-shadow: 0px 0px 15px -4px rgba(255, 255, 255, 0.3);
+    }
+  }
+}

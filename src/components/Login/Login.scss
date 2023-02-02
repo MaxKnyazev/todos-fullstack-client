@@ -1,0 +1,24 @@
+@import '../../variable';
+
+.login {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 20vh;
+
+  &__title {
+    margin-bottom: calc(2rem + 2vh);
+    color: $header-background-color;
+  }
+
+  &__input {
+    margin-bottom: calc(1rem + 1vh);
+    margin-right: 0;
+  }
+
+  &__button {
+    margin-top: 1rem;
+  }
+}
