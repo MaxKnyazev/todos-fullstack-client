@@ -1,6 +1,6 @@
 import './TodoItem.scss';
 
-function TodoItem({isDone = false, isImportant = false, isChange = false}) {
+function TodoItem({isDone = false, isImportant = false, isChange = false, title = 'test'}) {
   let itemClasses = 'todo__item item';
   itemClasses += isDone ? ' item--done' : '';
   itemClasses += isImportant ? ' item--important' : '';
@@ -16,7 +16,13 @@ function TodoItem({isDone = false, isImportant = false, isChange = false}) {
         )
       }
 
-      <span className="item__title">Something to do...</span>
+      {
+        isChange ? (
+          <input className="item__form" type="text" value={title} />
+          ) : (
+          <span className="item__title">{title}</span>
+        )
+      }
 
       <div className="item__wrapper">
         {
