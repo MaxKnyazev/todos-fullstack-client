@@ -54,7 +54,7 @@ const testTodoList = [
   {
     title: 'Read article',
     isImportant: false,
-    isChange: false,
+    isChange: true,
     isDone: true,
   },
 ]
@@ -62,15 +62,11 @@ const testTodoList = [
 function TodoList() {
   return (
     <ul className="todo__list">
-
       {
         testTodoList.map((todo) => (
           <TodoItem title={todo.title} isImportant={todo.isImportant} isDone={todo.isDone} isChange={todo.isChange}/>
         ))
       }
-
-      
-
     </ul>
   );
 }

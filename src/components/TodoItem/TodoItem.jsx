@@ -1,6 +1,13 @@
 import './TodoItem.scss';
+import { useState } from 'react';
 
 function TodoItem({isDone = false, isImportant = false, isChange = false, title = 'test'}) {
+  const [ inputValue, setInputValue ] = useState(title);
+
+  const inputHandler = (e) => {
+    setInputValue(e.target.value);
+  }
+
   let itemClasses = 'todo__item item';
   itemClasses += isDone ? ' item--done' : '';
   itemClasses += isImportant ? ' item--important' : '';
@@ -18,7 +25,7 @@ function TodoItem({isDone = false, isImportant = false, isChange = false, title 
 
       {
         isChange ? (
-          <input className="item__form" type="text" value={title} />
+          <input onChange={inputHandler} className="item__form" type="text" value={inputValue} />
           ) : (
           <span className="item__title">{title}</span>
         )

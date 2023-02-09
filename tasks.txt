@@ -1,24 +1,30 @@
-1. Скрывать прогресс бар на всех страницах, кроме todo.
-Done 2. Если тудушка сделана, пусть будет черно-белой.
-Done 3. Построить input на месте Текста в TodoItem.
-Done 4. Создать моковые данные (массив тудушек).
-Done 5. Вместо тестовых данных отображать моковый масcив тудушек в TodoList.
-6. Все инпуты в формах привязать к локальным state'ам.
-7. Поменять моковые иконки на настоящие svg в TodoItem.
-8. Логика redux и thunk для todo.
-  8.1. Redux 
-  8.2. Action Types (pending, success, error)
-  8.3. Action Creators 
-  8.4. Todo Reducer 
-9. Логика redux и thunk для user.
-  9.1. Redux 
-  9.2. Action Types (pending, success, error)
-  9.3. Action Creators 
-  9.4. User Reducer 
+======================== ВЕРСТКА:
+Done 1. Если тудушка сделана, пусть будет черно-белой.
+Done 2. Построить input на месте Текста в TodoItem.
+3. Поменять тестовые иконки на настоящие svg в TodoItem.
 
 
-CRUD
-CREATE - UPDATE DELETE
+99. Сделать сайт адаптивным (до 320px)
+
+
+======================== ЛОГИКА:
+Done 1. Создать моковые данные (массив тудушек).
+Done 2. Вместо тестовых данных отображать моковый масcив тудушек в TodoList.
+Done 3. Все инпуты в формах привязать к локальным state'ам.
+4. Логика redux и thunk для todo.
+  4.1. Redux 
+  4.2. Action Types (pending, success, error)
+  4.3. Action Creators 
+  4.4. Todo Reducer 
+5. Логика redux и thunk для user.
+  5.1. Redux 
+  5.2. Action Types (pending, success, error)
+  5.3. Action Creators 
+  5.4. User Reducer 
 
 
 99. Логика регистрации и логина.
+
+
+======================== ПРОЧЕЕ:
+1. Скрывать прогресс бар на всех страницах, кроме todo.

@@ -2,10 +2,15 @@ import './TodoForm.scss';
 import { useState } from 'react';
 
 function TodoForm() {
-  const { value, setValue } = useState('');
+  const [ inputValue, setInputValue ] = useState('');
+
+  const inputHandler = (e) => {
+    setInputValue(e.target.value);
+  }
+
   return (
     <section className="todo__form form">
-      <input placeholder="add todo..." type="text" className="form__input" value={value} />
+      <input onChange={inputHandler} placeholder="add todo..." type="text" className="form__input" value={inputValue} />
       <button className="form__button">Submit</button>
     </section>
   );
