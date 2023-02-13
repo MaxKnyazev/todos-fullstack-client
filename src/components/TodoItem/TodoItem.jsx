@@ -1,11 +1,31 @@
 import './TodoItem.scss';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { 
+  todoDeleteAsync, 
+  todoDoneAsync, 
+  todoImportantAsync, 
+  // todoChangeAsync, 
+} from '../../store/storeThunk/todo/actionCreaters'
 
-function TodoItem({isDone = false, isImportant = false, isChange = false, title = 'test'}) {
+function TodoItem({isDone = false, isImportant = false, isChange = false, title = 'test', id}) {
   const [ inputValue, setInputValue ] = useState(title);
+  const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     setInputValue(e.target.value);
+  }
+
+  const buttonDeleteHandler = () => {
+    dispatch(todoDeleteAsync(id))
+  }
+
+  const buttonDoneHandler = () => {
+    dispatch(todoDoneAsync(id))
+  }
+
+  const buttonImportantHandler = () => {
+    dispatch(todoImportantAsync(id))
   }
 
   let itemClasses = 'todo__item item';
@@ -17,9 +37,9 @@ function TodoItem({isDone = false, isImportant = false, isChange = false, title 
     <li className={itemClasses}>
       {
         isDone ? (
-          <button className="item__button item__button--done">&#10004;</button>
+          <button onClick={buttonDoneHandler} className="item__button item__button--done">&#10004;</button>
           ) : (
-          <button className="item__button item__button--done">&#10008;</button>
+          <button onClick={buttonDoneHandler} className="item__button item__button--done">&#10008;</button>
         )
       }
 
@@ -34,13 +54,13 @@ function TodoItem({isDone = false, isImportant = false, isChange = false, title 
       <div className="item__wrapper">
         {
           isImportant ? (
-            <button className="item__button item__button--important">	&#9873;</button>
+            <button onClick={buttonImportantHandler} className="item__button item__button--important">	&#9873;</button>
             ) : (
-              <button className="item__button item__button--important">	&#9872;</button>
+              <button onClick={buttonImportantHandler} className="item__button item__button--important">	&#9872;</button>
           )
         }
         <button className="item__button item__button--change">&#9998;</button>
-        <button className="item__button item__button--delete">&#10006;</button>
+        <button onClick={buttonDeleteHandler} className="item__button item__button--delete">&#10006;</button>
       </div>
     </li>
   );

@@ -8,7 +8,7 @@ function TodoList() {
     <ul className="todo__list">
       {
         todos.map((todo) => (
-          <TodoItem key={todo.id} title={todo.title} isImportant={todo.isImportant} isDone={todo.isDone} isChange={todo.isChange}/>
+          <TodoItem key={todo.id} title={todo.title} isImportant={todo.isImportant} isDone={todo.isDone} isChange={todo.isChange} id={todo.id}/>
         ))
       }
     </ul>

@@ -12,8 +12,6 @@ function TodoForm() {
   }
 
   const buttonHandler = () => {
-    console.log(12312312);
-    console.log(inputValue);
     dispatch(todoAddAsync(inputValue));
   }
 

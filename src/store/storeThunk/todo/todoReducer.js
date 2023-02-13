@@ -1,5 +1,6 @@
 import {
   TODO_ADD_PENDING, TODO_ADD_SUCCESS, TODO_ADD_ERROR,
+  TODO_DELETE_PENDING, TODO_DELETE_SUCCESS, TODO_DELETE_ERROR,
   TODO_DONE_PENDING, TODO_DONE_SUCCESS, TODO_DONE_ERROR,
   TODO_IMPORTANT_PENDING, TODO_IMPORTANT_SUCCESS, TODO_IMPORTANT_ERROR,
 } from './actionTypes';
@@ -96,6 +97,84 @@ export const todoReducer = (state = initialState, action) => {
       }
 
     case TODO_ADD_ERROR:
+      return {
+        ...state, 
+        isLoading: false,
+        error: action.payload
+      }
+      
+
+
+    case TODO_DELETE_PENDING:
+      return {
+        ...state, 
+        isLoading: true,
+      }
+
+    case TODO_DELETE_SUCCESS:
+      return {
+        ...state, 
+        todos: state.todos.filter(todo => todo.id !== action.payload),
+        isLoading: false
+      }
+
+    case TODO_DELETE_ERROR:
+      return {
+        ...state, 
+        isLoading: false,
+        error: action.payload
+      }
+
+
+
+    case TODO_DONE_PENDING:
+      return {
+        ...state, 
+        isLoading: true,
+      }
+
+    case TODO_DONE_SUCCESS:
+      return {
+        ...state, 
+        todos: state.todos.map(elem => {
+          if (elem.id === action.payload) {
+            return {...elem, isDone: !elem.isDone}
+          } else {
+            return elem;
+          }
+        }),
+        isLoading: false
+      }
+
+    case TODO_DONE_ERROR:
+      return {
+        ...state, 
+        isLoading: false,
+        error: action.payload
+      }
+
+
+
+    case TODO_IMPORTANT_PENDING:
+      return {
+        ...state, 
+        isLoading: true,
+      }
+
+    case TODO_IMPORTANT_SUCCESS:
+      return {
+        ...state, 
+        todos: state.todos.map(elem => {
+          if (elem.id === action.payload) {
+            return {...elem, isImportant: !elem.isImportant}
+          } else {
+            return elem;
+          }
+        }),
+        isLoading: false
+      }
+
+    case TODO_IMPORTANT_ERROR:
       return {
         ...state, 
         isLoading: false,
