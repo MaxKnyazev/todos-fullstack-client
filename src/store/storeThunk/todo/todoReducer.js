@@ -136,13 +136,11 @@ export const todoReducer = (state = initialState, action) => {
     case TODO_DONE_SUCCESS:
       return {
         ...state, 
-        todos: state.todos.map(elem => {
-          if (elem.id === action.payload) {
-            return {...elem, isDone: !elem.isDone}
-          } else {
-            return elem;
-          }
-        }),
+        todos: state.todos.map(elem => 
+          elem.id === action.payload 
+            ? {...elem, isDone: !elem.isDone}
+            : elem
+        ),
         isLoading: false
       }
 
@@ -164,13 +162,11 @@ export const todoReducer = (state = initialState, action) => {
     case TODO_IMPORTANT_SUCCESS:
       return {
         ...state, 
-        todos: state.todos.map(elem => {
-          if (elem.id === action.payload) {
-            return {...elem, isImportant: !elem.isImportant}
-          } else {
-            return elem;
-          }
-        }),
+        todos: state.todos.map(elem => 
+          elem.id === action.payload 
+            ? {...elem, isImportant: !elem.isImportant}
+            : elem
+        ),
         isLoading: false
       }
 
