@@ -1,16 +1,18 @@
 import './TodoItem.scss';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { 
   todoDeleteAsync, 
-  todoDoneAsync, 
-  todoImportantAsync, 
-  // todoChangeAsync, 
+  todoToggleDoneAsync, 
+  todoToggleImportantAsync,
+  todoToggleChangeAsync,
+  todoChangeTitleAsync,
 } from '../../store/storeThunk/todo/actionCreaters'
 
 function TodoItem({isDone = false, isImportant = false, isChange = false, title = 'test', id}) {
   const [ inputValue, setInputValue ] = useState(title);
   const dispatch = useDispatch();
+  const inputRef = useRef();
 
   const inputHandler = (e) => {
     setInputValue(e.target.value);
@@ -21,11 +23,24 @@ function TodoItem({isDone = false, isImportant = false, isChange = false, title 
   }
 
   const buttonDoneHandler = () => {
-    dispatch(todoDoneAsync(id))
+    dispatch(todoToggleDoneAsync(id))
   }
 
   const buttonImportantHandler = () => {
-    dispatch(todoImportantAsync(id))
+    dispatch(todoToggleImportantAsync(id))
+  }
+
+  const buttonChangeHandler = (e) => {
+    dispatch(todoToggleChangeAsync(id))
+
+    if (!isChange) {
+      // TODO: Костыль!!!!!!!
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 0)
+    } else {
+      dispatch(todoChangeTitleAsync(inputValue, id))
+    }
   }
 
   let itemClasses = 'todo__item item';
@@ -45,9 +60,9 @@ function TodoItem({isDone = false, isImportant = false, isChange = false, title 
 
       {
         isChange ? (
-          <input onChange={inputHandler} className="item__form" type="text" value={inputValue} />
+          <input onBlur={buttonChangeHandler} ref={inputRef} onChange={inputHandler} className="item__form" type="text" value={inputValue} />
           ) : (
-          <span className="item__title">{title}</span>
+          <span onClick={buttonChangeHandler} className="item__title">{title}</span>
         )
       }
 
@@ -59,7 +74,7 @@ function TodoItem({isDone = false, isImportant = false, isChange = false, title 
               <button onClick={buttonImportantHandler} className="item__button item__button--important">	&#9872;</button>
           )
         }
-        <button className="item__button item__button--change">&#9998;</button>
+        <button onClick={buttonChangeHandler} className="item__button item__button--change">&#9998;</button>
         <button onClick={buttonDeleteHandler} className="item__button item__button--delete">&#10006;</button>
       </div>
     </li>

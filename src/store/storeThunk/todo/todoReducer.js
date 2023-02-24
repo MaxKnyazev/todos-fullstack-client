@@ -1,8 +1,10 @@
 import {
   TODO_ADD_PENDING, TODO_ADD_SUCCESS, TODO_ADD_ERROR,
   TODO_DELETE_PENDING, TODO_DELETE_SUCCESS, TODO_DELETE_ERROR,
-  TODO_DONE_PENDING, TODO_DONE_SUCCESS, TODO_DONE_ERROR,
-  TODO_IMPORTANT_PENDING, TODO_IMPORTANT_SUCCESS, TODO_IMPORTANT_ERROR,
+  TODO_TOGGLE_DONE_PENDING, TODO_TOGGLE_DONE_SUCCESS, TODO_TOGGLE_DONE_ERROR,
+  TODO_TOGGLE_IMPORTANT_PENDING, TODO_TOGGLE_IMPORTANT_SUCCESS, TODO_TOGGLE_IMPORTANT_ERROR,
+  TODO_TOGGLE_CHANGE_PENDING, TODO_TOGGLE_CHANGE_SUCCESS, TODO_TOGGLE_CHANGE_ERROR,
+  TODO_CHANGE_TITLE_PENDING, TODO_CHANGE_TITLE_SUCCESS, TODO_CHANGE_TITLE_ERROR,
 } from './actionTypes';
 
 const initialState = {
@@ -127,13 +129,13 @@ export const todoReducer = (state = initialState, action) => {
 
 
 
-    case TODO_DONE_PENDING:
+    case TODO_TOGGLE_DONE_PENDING:
       return {
         ...state, 
         isLoading: true,
       }
 
-    case TODO_DONE_SUCCESS:
+    case TODO_TOGGLE_DONE_SUCCESS:
       return {
         ...state, 
         todos: state.todos.map(elem => 
@@ -144,7 +146,7 @@ export const todoReducer = (state = initialState, action) => {
         isLoading: false
       }
 
-    case TODO_DONE_ERROR:
+    case TODO_TOGGLE_DONE_ERROR:
       return {
         ...state, 
         isLoading: false,
@@ -153,13 +155,13 @@ export const todoReducer = (state = initialState, action) => {
 
 
 
-    case TODO_IMPORTANT_PENDING:
+    case TODO_TOGGLE_IMPORTANT_PENDING:
       return {
         ...state, 
         isLoading: true,
       }
 
-    case TODO_IMPORTANT_SUCCESS:
+    case TODO_TOGGLE_IMPORTANT_SUCCESS:
       return {
         ...state, 
         todos: state.todos.map(elem => 
@@ -170,7 +172,58 @@ export const todoReducer = (state = initialState, action) => {
         isLoading: false
       }
 
-    case TODO_IMPORTANT_ERROR:
+    case TODO_TOGGLE_IMPORTANT_ERROR:
+      return {
+        ...state, 
+        isLoading: false,
+        error: action.payload
+      }
+
+
+    case TODO_TOGGLE_CHANGE_PENDING:
+      return {
+        ...state, 
+        isLoading: true,
+      }
+
+    case TODO_TOGGLE_CHANGE_SUCCESS:
+      return {
+        ...state, 
+        todos: state.todos.map(elem => 
+          elem.id === action.payload 
+            ? {...elem, isChange: !elem.isChange}
+            : elem
+        ),
+        isLoading: false
+      }
+
+    case TODO_TOGGLE_CHANGE_ERROR:
+      return {
+        ...state, 
+        isLoading: false,
+        error: action.payload
+      }
+
+
+
+    case TODO_CHANGE_TITLE_PENDING:
+      return {
+        ...state, 
+        isLoading: true,
+      }
+
+    case TODO_CHANGE_TITLE_SUCCESS:
+      return {
+        ...state, 
+        todos: state.todos.map(elem => 
+          elem.id === action.payload.id 
+            ? {...elem, title: action.payload.title}
+            : elem
+        ),
+        isLoading: false
+      }
+
+    case TODO_CHANGE_TITLE_ERROR:
       return {
         ...state, 
         isLoading: false,

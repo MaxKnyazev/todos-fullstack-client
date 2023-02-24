@@ -1,8 +1,10 @@
 import {
   TODO_ADD_PENDING, TODO_ADD_SUCCESS, TODO_ADD_ERROR,
   TODO_DELETE_PENDING, TODO_DELETE_SUCCESS, TODO_DELETE_ERROR,
-  TODO_DONE_PENDING, TODO_DONE_SUCCESS, TODO_DONE_ERROR,
-  TODO_IMPORTANT_PENDING, TODO_IMPORTANT_SUCCESS, TODO_IMPORTANT_ERROR,
+  TODO_TOGGLE_DONE_PENDING, TODO_TOGGLE_DONE_SUCCESS, TODO_TOGGLE_DONE_ERROR,
+  TODO_TOGGLE_IMPORTANT_PENDING, TODO_TOGGLE_IMPORTANT_SUCCESS, TODO_TOGGLE_IMPORTANT_ERROR,
+  TODO_TOGGLE_CHANGE_PENDING, TODO_TOGGLE_CHANGE_SUCCESS, TODO_TOGGLE_CHANGE_ERROR,
+  TODO_CHANGE_TITLE_PENDING, TODO_CHANGE_TITLE_SUCCESS, TODO_CHANGE_TITLE_ERROR,
 } from './actionTypes';
 
 const delay = 0;
@@ -93,30 +95,30 @@ export const todoDeleteAsync = (id) => {
 
 
 
-export const todoDonePending = () => {
+export const todoToggleDonePending = () => {
   return {
-    type: TODO_DONE_PENDING,
+    type: TODO_TOGGLE_DONE_PENDING,
   }
 }
 
-export const todoDoneSuccess = (id) => {
+export const todoToggleDoneSuccess = (id) => {
   return {
-    type: TODO_DONE_SUCCESS,
+    type: TODO_TOGGLE_DONE_SUCCESS,
     payload: id
   }
 }
 
-export const todoDoneError = (error) => {
+export const todoToggleDoneError = (error) => {
   return {
-    type: TODO_DONE_ERROR,
+    type: TODO_TOGGLE_DONE_ERROR,
     payload: error
   }
 }
 
-export const todoDoneAsync = (id) => {
+export const todoToggleDoneAsync = (id) => {
   return async (dispatch) => {
     try {
-      dispatch(todoDonePending());
+      dispatch(todoToggleDonePending());
 
       const testAsync = (delay) => {
         return new Promise((resolve, reject) => {
@@ -127,39 +129,39 @@ export const todoDoneAsync = (id) => {
       }
       await testAsync(delay);
 
-      dispatch(todoDoneSuccess(id));
+      dispatch(todoToggleDoneSuccess(id));
     } catch (error) {
-      dispatch(todoDoneError(error));
+      dispatch(todoToggleDoneError(error));
     }
   }
 }
 
 
 
-export const todoImportantPending = () => {
+export const todoToggleImportantPending = () => {
   return {
-    type: TODO_IMPORTANT_PENDING,
+    type: TODO_TOGGLE_IMPORTANT_PENDING,
   }
 }
 
-export const todoImportantSuccess = (id) => {
+export const todoToggleImportantSuccess = (id) => {
   return {
-    type: TODO_IMPORTANT_SUCCESS,
+    type: TODO_TOGGLE_IMPORTANT_SUCCESS,
     payload: id
   }
 }
 
-export const todoImportantError = (error) => {
+export const todoToggleImportantError = (error) => {
   return {
-    type: TODO_IMPORTANT_ERROR,
+    type: TODO_TOGGLE_IMPORTANT_ERROR,
     payload: error
   }
 }
 
-export const todoImportantAsync = (id) => {
+export const todoToggleImportantAsync = (id) => {
   return async (dispatch) => {
     try {
-      dispatch(todoImportantPending());
+      dispatch(todoToggleImportantPending());
 
       const testAsync = (delay) => {
         return new Promise((resolve, reject) => {
@@ -170,9 +172,98 @@ export const todoImportantAsync = (id) => {
       }
       await testAsync(delay);
 
-      dispatch(todoImportantSuccess(id));
+      dispatch(todoToggleImportantSuccess(id));
     } catch (error) {
-      dispatch(todoImportantError(error));
+      dispatch(todoToggleImportantError(error));
+    }
+  }
+}
+
+
+
+export const todoToggleChangePending = () => {
+  return {
+    type: TODO_TOGGLE_CHANGE_PENDING,
+  }
+}
+
+export const todoToggleChangeSuccess = (id) => {
+  return {
+    type: TODO_TOGGLE_CHANGE_SUCCESS,
+    payload: id
+  }
+}
+
+export const todoToggleChangeError = (error) => {
+  return {
+    type: TODO_TOGGLE_CHANGE_ERROR,
+    payload: error
+  }
+}
+
+export const todoToggleChangeAsync = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(todoToggleChangePending());
+
+      const testAsync = (delay) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve();
+          }, delay)
+        })
+      }
+      await testAsync(delay);
+
+      dispatch(todoToggleChangeSuccess(id));
+    } catch (error) {
+      dispatch(todoToggleChangeError(error));
+    }
+  }
+}
+
+
+
+export const todoChangeTitlePending = () => {
+  return {
+    type: TODO_CHANGE_TITLE_PENDING,
+  }
+}
+
+export const todoChangeTitleSuccess = (title, id) => {
+  return {
+    type: TODO_CHANGE_TITLE_SUCCESS,
+    payload: {
+      id,
+      title
+    }
+  }
+}
+
+export const todoChangeTitleError = (error) => {
+  return {
+    type: TODO_CHANGE_TITLE_ERROR,
+    payload: error
+  }
+}
+
+export const todoChangeTitleAsync = (title, id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(todoChangeTitlePending());
+
+      const testAsync = (delay) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve();
+          }, delay)
+        })
+      }
+      await testAsync(delay);
+
+      dispatch(todoChangeTitleSuccess(title, id));
+    } catch (error) {
+      dispatch(todoChangeTitleError(error));
     }
   }
 }

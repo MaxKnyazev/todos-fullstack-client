@@ -13,6 +13,7 @@ function TodoForm() {
 
   const buttonHandler = () => {
     dispatch(todoAddAsync(inputValue));
+    setInputValue('');
   }
 
   return (
