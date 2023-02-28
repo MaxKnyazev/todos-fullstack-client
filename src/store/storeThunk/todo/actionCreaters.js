@@ -1,11 +1,34 @@
 import {
-  TODO_ADD_PENDING, TODO_ADD_SUCCESS, TODO_ADD_ERROR,
-  TODO_DELETE_PENDING, TODO_DELETE_SUCCESS, TODO_DELETE_ERROR,
-  TODO_TOGGLE_DONE_PENDING, TODO_TOGGLE_DONE_SUCCESS, TODO_TOGGLE_DONE_ERROR,
-  TODO_TOGGLE_IMPORTANT_PENDING, TODO_TOGGLE_IMPORTANT_SUCCESS, TODO_TOGGLE_IMPORTANT_ERROR,
-  TODO_TOGGLE_CHANGE_PENDING, TODO_TOGGLE_CHANGE_SUCCESS, TODO_TOGGLE_CHANGE_ERROR,
-  TODO_CHANGE_TITLE_PENDING, TODO_CHANGE_TITLE_SUCCESS, TODO_CHANGE_TITLE_ERROR,
+  TODO_ADD_PENDING, 
+  TODO_ADD_SUCCESS, 
+  TODO_ADD_ERROR,
+  
+  TODO_DELETE_PENDING, 
+  TODO_DELETE_SUCCESS, 
+  TODO_DELETE_ERROR,
+
+  TODO_TOGGLE_DONE_PENDING, 
+  TODO_TOGGLE_DONE_SUCCESS, 
+  TODO_TOGGLE_DONE_ERROR,
+
+  TODO_TOGGLE_IMPORTANT_PENDING, 
+  TODO_TOGGLE_IMPORTANT_SUCCESS, 
+  TODO_TOGGLE_IMPORTANT_ERROR,
+
+  TODO_TOGGLE_CHANGE_PENDING, 
+  TODO_TOGGLE_CHANGE_SUCCESS, 
+  TODO_TOGGLE_CHANGE_ERROR,
+
+  TODO_CHANGE_TITLE_PENDING, 
+  TODO_CHANGE_TITLE_SUCCESS, 
+  TODO_CHANGE_TITLE_ERROR,
+
+  GET_ALL_TODOS_PENDING, 
+  GET_ALL_TODOS_SUCCESS, 
+  GET_ALL_TODOS_ERROR,
 } from './actionTypes';
+
+import { axiosInstance } from '../../../utils/axiosInstance';
 
 const delay = 0;
 
@@ -34,16 +57,13 @@ export const todoAddAsync = (title) => {
     try {
       dispatch(todoAddPending());
 
-      const testAsync = (delay) => {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve();
-          }, delay)
-        })
-      }
-      await testAsync(delay);
+      const todo = await axiosInstance.post('/todos/create', {
+        userId: '708c5fe4-b759-11ed-afa1-0242ac120002',
+        title,
+      });
+      console.log(todo);
 
-      dispatch(todoAddSuccess(title));
+      dispatch(todoAddSuccess(todo.data.todo));
     } catch (error) {
       dispatch(todoAddError(error));
     }
@@ -264,6 +284,43 @@ export const todoChangeTitleAsync = (title, id) => {
       dispatch(todoChangeTitleSuccess(title, id));
     } catch (error) {
       dispatch(todoChangeTitleError(error));
+    }
+  }
+}
+
+
+
+export const getAllTodosPending = () => {
+  return {
+    type: GET_ALL_TODOS_PENDING,
+  }
+}
+
+export const getAllTodosSuccess = (todos) => {
+  return {
+    type: GET_ALL_TODOS_SUCCESS,
+    payload: todos,
+  }
+}
+
+export const getAllTodosError = (error) => {
+  return {
+    type: GET_ALL_TODOS_ERROR,
+    payload: error
+  }
+}
+
+export const getAllTodosAsync = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(getAllTodosPending());
+
+      const todos = await axiosInstance.get('/todos');
+      console.log(todos);
+
+      dispatch(getAllTodosSuccess(todos.data.todos));
+    } catch (error) {
+      dispatch(getAllTodosError(error));
     }
   }
 }

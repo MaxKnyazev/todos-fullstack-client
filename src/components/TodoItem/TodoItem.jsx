@@ -23,7 +23,7 @@ function TodoItem({isDone = false, isImportant = false, isChange = false, title 
   }
 
   const buttonDoneHandler = () => {
-    dispatch(todoToggleDoneAsync(id))
+    dispatch(todoToggleDoneAsync(id));
   }
 
   const buttonImportantHandler = () => {
